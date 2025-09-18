@@ -62,8 +62,6 @@ def Properties_Register():
 
     bpy.types.WindowManager.bless_session_properties = bpy.props.PointerProperty(type=BLESS_PG_SessionProperties)
 
-    # bpy.types.WindowManager.bless_tools = bpy.props.PointerProperty(type=BlessTools)
-
     # object properties
     try:
         bpy.utils.register_class(OMIPhysicsBody)
@@ -76,14 +74,6 @@ def Properties_Register():
     bpy.types.Object.shape_properties = bpy.props.PointerProperty(type=OMIPhysicsShape)
 
     bpy.types.Object.bless_object_collision_settings = bpy.props.PointerProperty(type=BLESS_PG_ObjectCollisionSettings)
-
-    # Add default bless_class property
-    # bpy.types.Object.bless_class = bpy.props.EnumProperty(
-    #     name="Godot Class",
-    #     description="Select Godot class for this object",
-    #     items=[("NONE", "None", "No Godot class assigned")],
-    #     default="NONE"
-    # )
 
 
 def Properties_Unregister():
@@ -105,18 +95,12 @@ def Properties_Unregister():
     del bpy.types.Object.shape_properties
     del bpy.types.Object.bless_object_collision_settings
 
-    # del bpy.types.Object.bless_class
-
-    # del bpy.types.WindowManager.bless_tools
-
 
 def UI_Load():
-    # bpy.types.VIEW3D_PT_active_tool_duplicate.prepend(UIPreset_ToolBox)
     bpy.types.OBJECT_PT_context_object.prepend(UIPreset_ObjectDataSheet)
 
 
 def UI_Unload():
-    # bpy.types.VIEW3D_PT_active_tool_duplicate.remove(UIPreset_ToolBox)
     bpy.types.OBJECT_PT_context_object.remove(UIPreset_ObjectDataSheet)
 
 

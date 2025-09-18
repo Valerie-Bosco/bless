@@ -2,27 +2,6 @@ import bpy
 
 from ..BLESS_Properties import BLESS_PG_SessionProperties
 
-# def UIPreset_ToolBox(self, context: bpy.types.Context):
-#     layout: bpy.types.UILayout = self.layout.box()
-
-#     window_manager = context.window_manager
-#     session_properties: BLESS_PG_SessionProperties = window_manager.bless_session_properties
-
-#     layout.prop(
-#         session_properties,
-#         "b_show_tool_box",
-#         text="Bless ToolBox",
-#         icon='TRIA_DOWN' if session_properties.b_show_tool_box else 'TRIA_RIGHT',
-#         emboss=False
-#     )
-
-#     if (session_properties.b_show_tool_box):
-#         row = layout.row().split(factor=0.02)
-#         row.separator()
-#         object_data_layout = row.column()
-
-#         # UIPreset_ToolBoxTools(object_data_layout, context)
-
 
 def UIPreset_ObjectDataSheet(self, context: bpy.types.Context):
     layout: bpy.types.UILayout = self.layout.box()
@@ -45,48 +24,6 @@ def UIPreset_ObjectDataSheet(self, context: bpy.types.Context):
         object_data_layout = row.column()
 
         UIPreset_ObjectCollisionSettings(object_data_layout, context)
-
-
-# def UIPreset_ToolBoxTools(layout: bpy.types.UILayout, context: bpy.types.Context):
-#     if (layout is not None) and (context is not None):
-#         window_manager = context.window_manager
-#         session_properties: BLESS_PG_SessionProperties = window_manager.bless_session_properties
-
-#         row = layout.row().split(factor=0.5)
-
-#         column = row.column()
-#         column.label(text="Greybox:")
-#         column.operator("bless.greybox_draw", text="Draw", icon="BRUSH_DATA")
-#         column.operator("bless.greybox_transform", text="Transform", icon="ORIENTATION_GLOBAL")
-#         column.operator("bless.greybox_extrude", text="Extrude", icon="ORIENTATION_NORMAL")
-#         column.operator("bless.greybox_snap", text="Snap to Grid", icon="SNAP_GRID")
-
-#         grid_row = column.row()
-#         grid_row.prop(window_manager, "unit_size", text="Unit Size")
-#         grid_row.operator("map_editor.double_unit_size", text="", icon="MESH_GRID")
-#         grid_row.operator("map_editor.halve_unit_size", text="", icon="SNAP_GRID")
-
-#         column.separator()
-
-#         column.label(text="Auto Origin:")
-#         column.prop(bless_tools, "origin_type", text="Type")
-#         column.operator("object.autoorigin", text="Auto Origin", icon="MESH_DATA")
-
-#         column = row.column()
-#         column.label(text="Game Profile:")
-#         column.prop(bless_tools, "profile_filepath", text="")
-#         column.operator("object.load_game_profile", text="Load Profile", icon='IMPORT')
-
-#         column.separator(factor=1)
-
-#         column.prop(bless_tools, "lock_camera", text="Lock Camera")
-
-#         column.separator(factor=7)
-#         column.label(text="Collision Shape Color:")
-#         column.row().prop(bless_tools, "trimesh_color", text="Trimesh")
-#         column.row().prop(bless_tools, "convex_color", text="Convex")
-
-#         layout.separator()
 
 
 def UIPreset_ObjectCollisionSettings(layout: bpy.types.UILayout, context: bpy.types.Context):

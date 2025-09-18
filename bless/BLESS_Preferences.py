@@ -29,25 +29,5 @@ class bless_AddonPreferences(bpy.types.AddonPreferences):
         preference_box: bpy.types.UILayout = self.layout
         preference_box.grid_flow(row_major=True, align=True).prop(self, "addon_preference_tabs", expand=True)
 
-        # if (self.addon_preference_tabs == "HOME"):
-        # from .icons import icons_dictionary
-        # row = preference_box.split(factor=0.33)
-        # row.separator()
-        # row.operator("wm.url_open", text="BLESS Discord", icon_value=icons_dictionary["discord_icon"]).url = ""
-        # row.separator()
-
-        # if (self.addon_preference_tabs == "KEYBINDS"):
-        #     keybinds_column = preference_box.column()
-
-        #     keymap: bpy.types.KeyMap
-        #     for keymap, keymap_item in bless_keymap_utils.bless_addon_keymaps:
-        #         rna_keymap_ui.draw_kmi([], keymap_configs, keymap, keymap_item, keybinds_column, 0)
-
         if (self.addon_preference_tabs == "SETTINGS"):
             update_settings_ui(context, preference_box)
-
-# keymap_configs = context.window_manager.keyconfigs.user
-
-# class BlessGameConfig(bpy.types.PropertyGroup):
-#     game: bpy.props.StringProperty(name="Game", description="Title of your project.", default="My Game")  # type:ignore
-#     game_directory: bpy.props.StringProperty(name="Game Directory", description="Directory of the game.", default="C:\'")  # type:ignore
