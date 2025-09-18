@@ -44,7 +44,9 @@ addon_updater = Alx_Addon_Updater(
 class glTF2ExportUserExtension(BLESS_GLTF):
 
     def __init__(self):
-        super.__init__()
+        from io_scene_gltf2.io.com.gltf2_io_extensions import \
+            Extension  # type:ignore [available to blender not vscode and won't throw an error]
+        self.Extension = Extension
 
     def gather_gltf_extensions_hook(self, gltf_plan, export_settings):
         return super().gather_gltf_extensions_hook(gltf_plan, export_settings)
@@ -75,15 +77,25 @@ def Properties_Register():
     bpy.types.Object.body_properties = bpy.props.PointerProperty(type=OMIPhysicsBody)
     bpy.types.Object.shape_properties = bpy.props.PointerProperty(type=OMIPhysicsShape)
 
+    bpy.types.Object.collision_types: bpy.props.EnumProperty(
+        name="Collision Type",
+        description="Static level geometry.",
+        default="trimesh",
+        items=[
+            ("trimesh", "Trimesh", "", 1),
+            ("convex", "Convex", "", 1 << 1),
+            ("custom", "Custom", "", 1 << 2),
+            ("none", "None", "", 1 << 3),
+        ])  # type: ignore
     bpy.types.Object.bless_object_collision_settings = bpy.props.PointerProperty(type=BLESS_PG_ObjectCollisionSettings)
 
     # Add default bless_class property
-    # bpy.types.Object.bless_class = bpy.props.EnumProperty(
-    #     name="Godot Class",
-    #     description="Select Godot class for this object",
-    #     items=[("NONE", "None", "No Godot class assigned")],
-    #     default="NONE"
-    # )
+    bpy.types.Object.bless_class = bpy.props.EnumProperty(
+        name="Godot Class",
+        description="Select Godot class for this object",
+        items=[("NONE", "None", "No Godot class assigned")],
+        default="NONE"
+    )
 
 
 def Properties_Unregister():
@@ -103,9 +115,10 @@ def Properties_Unregister():
         pass
     del bpy.types.Object.body_properties
     del bpy.types.Object.shape_properties
+    del bpy.types.Object.collision_types
     del bpy.types.Object.bless_object_collision_settings
 
-    # del bpy.types.Object.bless_class
+    del bpy.types.Object.bless_class
 
     # del bpy.types.WindowManager.bless_tools
 

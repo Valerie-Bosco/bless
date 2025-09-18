@@ -1,9 +1,10 @@
-
+from ..utilities.BLESS_General_Utils import DEV_BlessConsolePrint
 
 # constants
 GLTF_LIGHT_FACTOR = 680
 
 # TODO: allow user extensions. One day.
+node_tree = {}
 user_extensions = []
 
 

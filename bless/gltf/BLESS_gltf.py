@@ -1,28 +1,30 @@
+
+import copy
+
 import bpy
 
 from ..utilities.BLESS_General_Utils import DEV_BlessConsolePrint
+from .BLESS_gltf_definitions import core_extensions, physics_extensions
+from .gltf_export import (build_body_dictionary, build_collision_filter,
+                          build_shape_dictionary, node_tree)
 
 
 class BLESS_GLTF:
-    def __init__(self):
-        from io_scene_gltf2.io.com.gltf2_io_extensions import Extension
-        self.Extension = Extension
 
     def gather_node_hook(self, gltf2_object, blender_object, export_settings):
-        if gltf2_object.extensions is None:
+
+        if (gltf2_object.extensions is None):
             gltf2_object.extensions = {}
 
+        # godot class
         if hasattr(blender_object, "godot_class"):
-            # Get the class name directly from the object
             class_name = blender_object["class"] if "class" in blender_object else blender_object.godot_class
 
-            # Format the class data properly
             class_data = {
                 "type": class_name,
                 "properties": {}
             }
 
-            # Add class-specific properties
             props_name = f"godot_class_{class_name.lower()}_props"
             if hasattr(blender_object, props_name):
                 props = getattr(blender_object, props_name)
@@ -137,7 +139,7 @@ class BLESS_GLTF:
         # Add core extensions to extensionsUsed
         gltf_plan.extensions_used += core_extensions
 
-        # Check for audio emitters and explicitly add the extension
+        # ----- AUDIO -----
         has_audio = False
         for node in gltf_plan.nodes:
             if node.extensions and "KHR_audio_emitter" in node.extensions:

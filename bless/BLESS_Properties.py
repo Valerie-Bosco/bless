@@ -9,16 +9,6 @@ class BLESS_PG_SessionProperties(bpy.types.PropertyGroup):
 
 
 class BLESS_PG_ObjectCollisionSettings(bpy.types.PropertyGroup):
-    collision_types: bpy.props.EnumProperty(
-        name="Collision Type",
-        description="Static level geometry.",
-        default="trimesh",
-        items=[
-            ("trimesh", "Trimesh", "", 1),
-            ("convex", "Convex", "", 1 << 1),
-            ("custom", "Custom", "", 1 << 2),
-            ("none", "None", "", 1 << 3),
-        ])  # type: ignore
 
     # region collision mask layers
     layers_1_8 = [(f"LAYER_{n}", f"{n+1}", "") for n in range(0, 8)]
